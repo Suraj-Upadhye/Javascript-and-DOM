@@ -9,13 +9,36 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            transition: background 0.5s;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
         }
         .answer {
             display: block;
             margin: 10px auto;
-            padding: 10px;
+            padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .answer:hover {
+            transform: scale(1.1);
+        }
+        .correct {
+            background: #4CAF50;
+            color: white;
+        }
+        .wrong {
+            background: #f44336;
+            color: white;
         }
         #result {
             margin-top: 20px;
@@ -25,20 +48,28 @@
     </style>
 </head>
 <body>
-    <h2>Simple Quiz</h2>
-    <p>What is the capital of France?</p>
+    <div class="quiz-container">
+        <h2>Simple Quiz</h2>
+        <p>What is the capital of France?</p>
 
-    <button class="answer" data-correct="false">Berlin</button>
-    <button class="answer" data-correct="false">Madrid</button>
-    <button class="answer" data-correct="true">Paris</button>
+        <button class="answer" data-correct="false">Berlin</button>
+        <button class="answer" data-correct="false">Madrid</button>
+        <button class="answer" data-correct="true">Paris</button>
 
-    <p id="result"></p>
+        <p id="result"></p>
+    </div>
 
     <script>
         document.querySelectorAll(".answer").forEach(button => {
             button.addEventListener("click", function() {
                 let isCorrect = this.getAttribute("data-correct") === "true";
                 document.getElementById("result").innerText = isCorrect ? "Correct! 🎉" : "Wrong Answer! ❌";
+                
+                document.querySelectorAll(".answer").forEach(btn => {
+                    btn.classList.remove("correct", "wrong");
+                });
+                
+                this.classList.add(isCorrect ? "correct" : "wrong");
             });
         });
     </script>
