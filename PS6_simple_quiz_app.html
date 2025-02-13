@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .answer {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Simple Quiz</h2>
+    <p>What is the capital of France?</p>
+
+    <button class="answer" data-correct="false">Berlin</button>
+    <button class="answer" data-correct="false">Madrid</button>
+    <button class="answer" data-correct="true">Paris</button>
+
+    <p id="result"></p>
+
+    <script>
+        document.querySelectorAll(".answer").forEach(button => {
+            button.addEventListener("click", function() {
+                let isCorrect = this.getAttribute("data-correct") === "true";
+                document.getElementById("result").innerText = isCorrect ? "Correct! 🎉" : "Wrong Answer! ❌";
+            });
+        });
+    </script>
+</body>
+</html>
